@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Juego del ahorcado - Alura Challenges Oracle ONE</title>
+  </head>
+  <body>
+    <header>
+      <img src="img/Logo.png" alt="Alura logo" />
+    </header>
+
+    <main>
+      <div class="inicio">
+        <button class="principal bloque">Iniciar juego</button>
+        <button class="secundario bloque">Agregar nueva palabra</button>
+      </div>
+      <canvas class="esconder canvasPrincipal" width="294px" height="360px"></canvas>
+
+      <div id="bloqueLetras"></div>
+      <div id="bloqueRenglones"></div>
+      <div id="letrasPresionadas"></div>
+
+      <div class="interaccion esconder">
+        <button class="nuevoJuego centro">Nuevo juego</button>
+        <button class="desistir centro">Desistir</button>
+      </div>
+
+
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/dibujar.js"></script>
+    <script src="js/otro.js"></script>
+  </body>
+</html>

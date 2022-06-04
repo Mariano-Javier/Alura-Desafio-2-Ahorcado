@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #f3f5fc;
+}
+header img {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.inicio {
+  margin-top: 30vh;
+}
+
+.principal {
+  width: 317px;
+  height: 114px;
+  color: white;
+  background-color: #0a3871;
+  border-radius: 30px;
+  font-size: 1.3rem;
+  border: none;
+}
+
+.principal:hover {
+  background-color: #072549;
+}
+
+.secundario {
+  width: 280px;
+  height: 67px;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: 1px solid #082c57;
+  color: #082c57;
+  background-color: #f3f5fc;
+}
+
+.secundario:hover {
+  background-color: #e0e4f1;
+}
+
+.bloque {
+  display: block;
+  margin: 20px auto;
+  font-family: "Inter", sans-serif;
+}
+
+.esconder{
+  display: none;
+ 
+}
+
+.invisible {
+  visibility:hidden;
+}
+
+.tablero{
+  /* width: 1200px;
+  height: 700px; */
+  padding: 0;
+  margin: auto;
+  display: block;
+  /* border:1px solid #d3d3d3; */
+}
+
+.nuevoJuego{
+  width: 280px;
+  height: 67px;
+  color: white;
+  background-color: #0a3871;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: none;
+}
+
+.nuevoJuego:hover {
+  background-color: #072549;
+}
+.desistir{
+  width: 280px;
+  height: 67px;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: 1px solid #082c57;
+  color: #082c57;
+  background-color: #f3f5fc;
+}
+.desistir:hover {
+  background-color: #e0e4f1;
+}
+
+.comandos{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centro{
+  margin:15px;
+}
+
+
+.canvasPrincipal{
+  margin-bottom: 50px;
+}
+
+#bloqueLetras{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.letrasIndividuales{
+  font-size: 48px;
+  text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+  color: #0A3871;
+  width: 60px;
+  text-align: center;
+  margin-left: 6px;
+  margin-right: 6px
+}
+
+#bloqueRenglones{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  
+}
+
+.canvasSecundario{
+  width:60px;
+  height:4px;
+  background-color: #0a3871;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+#letrasPresionadas{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
