@@ -1,4 +1,4 @@
-# Alura-Desafio-2-Ahorcado
+# Alura Challenges Oracle ONE - Juego del ahorcado
 En este primer mes vamos a trabajar en un proyecto de **juego del ahorcado** para que pongas en práctica lo que aprendiste a lo largo de esta formación **Principiante en Programación**.
 
 **Requisitos:**
