@@ -32,6 +32,8 @@ nuevoJuego.addEventListener("click", generadorPalabrasRandom);
 let palabrasAhorcado = [ "hola", "mañana", "tarde", "noche", "lunes", "martes", "miercoles", "jueves", "viernes",];
 
 let palabraABuscar;
+let vectorComparador;
+
 //Funcion que busca una nueva palabra
 function generadorPalabrasRandom() {
   pincel.clearRect(0, 0, tablero.width, tablero.height); //limpia el canvas
@@ -42,6 +44,7 @@ function generadorPalabrasRandom() {
   letrasAceptadasTemp = []; // limpia el vector de letras rechazadas
   resetMsg(); //limpia el mensaje final
 
+
   //dibuja la base
   dibujarLineas(0, 357, 294, 358);
   contadorErrores = 0;
@@ -49,6 +52,7 @@ function generadorPalabrasRandom() {
   let palabraRandom = palabrasAhorcado[numeroRandom];
   let palabraDividida = palabraRandom.split("");
   palabraABuscar = palabraDividida;
+  vectorComparador  = palabraABuscar.slice();
   console.log(palabraDividida); //borrar
 
   //bloque que crea las letras a buscar en pantalla
@@ -70,6 +74,9 @@ function generadorPalabrasRandom() {
   }
 }
 
+
+
+
 //funcion contador de letras
 function contadorLetras(array, valor) {
   var contador = 0;
@@ -77,11 +84,14 @@ function contadorLetras(array, valor) {
   return contador;
 }
 
+
+
 //evento que escucha el teclado
-document.addEventListener(
-  "keydown",
-  (event) => {
+document.addEventListener("keydown",(event) => {
     let nombre = event.key;
+
+  
+
     console.log("tecla presionada: " + nombre);
     if (nombre.match(/^([a-z|ñ|]{1,})$/)) {
       //[a-z] limite de valores, {1,} indica el largo de caracteres, en este caso solo buscamos 1, ya que hay teclas q comienzan con caracteres validos.
@@ -93,10 +103,7 @@ document.addEventListener(
       if (idx == -1) {
         letrasRechazadasTemp.push(element); //carga el vector con las letras rechazadas para luego compararlas y que no ser repitan
 
-        if (
-          letrasRechazadasTemp.includes(element) &&
-          contadorLetras(letrasRechazadasTemp, element) == 1
-        ) {
+        if (letrasRechazadasTemp.includes(element) && contadorLetras(letrasRechazadasTemp, element) == 1 ) {
           //verifica que no se escriban letras repetidas en pantalla
           let nuevaLetraInvalida = document.createElement("div");
           nuevaLetraInvalida.innerHTML = element;
@@ -110,20 +117,35 @@ document.addEventListener(
         }
       } else {
         letrasAceptadasTemp.push(element);
+
+         //uso del vector comparador que copia el vector con la palabar y va removiendo los valores que si cumplen para que luego de que el array llegue a 0 el jugador gane
+         vectorComparador = vectorComparador.filter(function(value, index, arr){ 
+            return value != element;
+        });
+
+        if (vectorComparador==0){
+          ganaste();
+        }
+
         console.log("vector aceptado: " + letrasAceptadasTemp);
 
         while (idx != -1) {
           indices.push(idx);
           idx = array.indexOf(element, idx + 1);
         }
+
+        
       }
 
-      console.log(indices);
+      console.log("indices: "+indices);
+
       let revelarAceptado = document.querySelectorAll(".letrasIndividuales");
 
       for (let i = 0; i < indices.length; i++) {
         revelarAceptado[indices[i]].classList.remove("invisible");
       }
+
+
     } else {
       console.log("no es letra");
     }
@@ -142,4 +164,11 @@ function perdiste() {
 //funcion que resetea el mensaje cuando ganas o perdes
 function resetMsg() {
   document.querySelector(".mensajeFinal").innerHTML = "";
+}
+//funcion que escribe el mensaje final "ganaste"
+function ganaste() {
+  let fin = document.querySelector(".mensajeFinal");
+  let nuevoMesaje = document.createElement("div");
+  nuevoMesaje.innerHTML = "<p>¡Ganaste!</p>";
+  fin.appendChild(nuevoMesaje);
 }
