@@ -44,6 +44,8 @@ function generadorPalabrasRandom() {
   letrasAceptadasTemp = []; // limpia el vector de letras rechazadas
   resetMsg(); //limpia el mensaje final
 
+  //evento que escucha el teclado
+  document.addEventListener("keydown", escuchar);
 
   //dibuja la base
   dibujarLineas(0, 357, 294, 358);
@@ -74,9 +76,6 @@ function generadorPalabrasRandom() {
   }
 }
 
-
-
-
 //funcion contador de letras
 function contadorLetras(array, valor) {
   var contador = 0;
@@ -84,74 +83,65 @@ function contadorLetras(array, valor) {
   return contador;
 }
 
+//funcion que genera el motor del juego
+function escuchar(event){
+  let nombre = event.key;
 
+  console.log("tecla presionada: " + nombre);
+  if (nombre.match(/^([a-z|ñ|]{1,})$/)) {
+    //[a-z] limite de valores, {1,} indica el largo de caracteres, en este caso solo buscamos 1, ya que hay teclas q comienzan con caracteres validos.
+    let indices = []; //vector que va a devolver los valores de los indices que el usuario ingreso por teclado
+    let array = palabraABuscar; //vector con la palabra dividida
+    let element = nombre; //caracter que ingresa el usuario por teclado
+    let idx = array.indexOf(element);
 
-//evento que escucha el teclado
-document.addEventListener("keydown",(event) => {
-    let nombre = event.key;
+    if (idx == -1) {
+      letrasRechazadasTemp.push(element); //carga el vector con las letras rechazadas para luego compararlas y que no ser repitan
 
-  
+      if (letrasRechazadasTemp.includes(element) && contadorLetras(letrasRechazadasTemp, element) == 1 ) {
+        //verifica que no se escriban letras repetidas en pantalla
+        let nuevaLetraInvalida = document.createElement("div");
+        nuevaLetraInvalida.innerHTML = element;
+        nuevaLetraInvalida.classList.add("letrasInvalidas");
+        visorLetras.appendChild(nuevaLetraInvalida);
 
-    console.log("tecla presionada: " + nombre);
-    if (nombre.match(/^([a-z|ñ|]{1,})$/)) {
-      //[a-z] limite de valores, {1,} indica el largo de caracteres, en este caso solo buscamos 1, ya que hay teclas q comienzan con caracteres validos.
-      let indices = []; //vector que va a devolver los valores de los indices que el usuario ingreso por teclado
-      let array = palabraABuscar; //vector con la palabra dividida
-      let element = nombre; //caracter que ingresa el usuario por teclado
-      let idx = array.indexOf(element);
-
-      if (idx == -1) {
-        letrasRechazadasTemp.push(element); //carga el vector con las letras rechazadas para luego compararlas y que no ser repitan
-
-        if (letrasRechazadasTemp.includes(element) && contadorLetras(letrasRechazadasTemp, element) == 1 ) {
-          //verifica que no se escriban letras repetidas en pantalla
-          let nuevaLetraInvalida = document.createElement("div");
-          nuevaLetraInvalida.innerHTML = element;
-          nuevaLetraInvalida.classList.add("letrasInvalidas");
-          visorLetras.appendChild(nuevaLetraInvalida);
-
-          console.log("vector rechazado: " + letrasRechazadasTemp);
-          console.log("valor no encontrado");
-          contadorErrores++;
-          dibujadorDePartes();
-        }
-      } else {
-        letrasAceptadasTemp.push(element);
-
-         //uso del vector comparador que copia el vector con la palabar y va removiendo los valores que si cumplen para que luego de que el array llegue a 0 el jugador gane
-         vectorComparador = vectorComparador.filter(function(value, index, arr){ 
-            return value != element;
-        });
-
-        if (vectorComparador==0){
-          ganaste();
-        }
-
-        console.log("vector aceptado: " + letrasAceptadasTemp);
-
-        while (idx != -1) {
-          indices.push(idx);
-          idx = array.indexOf(element, idx + 1);
-        }
-
-        
+        console.log("vector rechazado: " + letrasRechazadasTemp);
+        console.log("valor no encontrado");
+        contadorErrores++;
+        dibujadorDePartes();
       }
-
-      console.log("indices: "+indices);
-
-      let revelarAceptado = document.querySelectorAll(".letrasIndividuales");
-
-      for (let i = 0; i < indices.length; i++) {
-        revelarAceptado[indices[i]].classList.remove("invisible");
-      }
-
-
     } else {
-      console.log("no es letra");
+      letrasAceptadasTemp.push(element);
+
+       //uso del vector comparador que copia el vector con la palabar y va removiendo los valores que si cumplen para que luego de que el array llegue a 0 el jugador gane
+       vectorComparador = vectorComparador.filter(function(value, index, arr){ 
+          return value != element;
+      });
+
+      if (vectorComparador==0){
+        ganaste();
+      }
+
+      console.log("vector aceptado: " + letrasAceptadasTemp);
+
+      while (idx != -1) {
+        indices.push(idx);
+        idx = array.indexOf(element, idx + 1);
+      }      
     }
-  },
-  false
-);
+
+    console.log("indices: "+indices);
+
+    let revelarAceptado = document.querySelectorAll(".letrasIndividuales");
+
+    for (let i = 0; i < indices.length; i++) {
+      revelarAceptado[indices[i]].classList.remove("invisible");
+    }
+
+  } else {
+    console.log("no es letra");
+  }
+}
 
 //funcion que escribe el mensaje final "perdiste"
 function perdiste() {
@@ -159,6 +149,7 @@ function perdiste() {
   let nuevoMesaje = document.createElement("div");
   nuevoMesaje.innerHTML = "<p>¡Perdiste!</p>";
   fin.appendChild(nuevoMesaje);
+  document.removeEventListener("keydown", escuchar);
 }
 
 //funcion que resetea el mensaje cuando ganas o perdes
@@ -171,4 +162,5 @@ function ganaste() {
   let nuevoMesaje = document.createElement("div");
   nuevoMesaje.innerHTML = "<p>¡Ganaste!</p>";
   fin.appendChild(nuevoMesaje);
+  document.removeEventListener("keydown", escuchar);
 }
