@@ -144,4 +144,13 @@ header img {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 60px;
+}
+
+.letrasInvalidas{
+  text-align: center;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+  color: #041b36;
 }
