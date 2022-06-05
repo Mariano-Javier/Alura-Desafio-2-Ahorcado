@@ -45,6 +45,7 @@ function dibujadorDePartes(){
       break;
     case 9:
       dibujarLineas(195, 244, 235, 310);
+      perdiste();
       break;
     default:
       console.log("no hay opcion cargada.");
