@@ -4,7 +4,12 @@ let tablero = document.querySelector(".canvasPrincipal");
 let pincel = tablero.getContext("2d");
 let botonesInteractuar = document.querySelector(".interaccion");
 
+let visorLetras = document.querySelector("#letrasPresionadas");
+
 let contadorErrores;
+
+let letrasAceptadasTemp=[];
+let letrasRechazadasTemp=[];
 
 //evento del boton iniciar juego
 botonIniciar.addEventListener("click", crearTablero);
@@ -34,7 +39,8 @@ function generadorPalabrasRandom() {
   document.getElementById('bloqueLetras').innerHTML = '';//limpia las letas del juego anterior
   document.getElementById('bloqueRenglones').innerHTML = '';//limpia los renglones del juego anterior
   document.getElementById('letrasPresionadas').innerHTML = '';//limpia las letras presionadas del juego anterior.
-  
+  letrasRechazadasTemp=[];// limpia el vector de letras rechazadas
+  letrasAceptadasTemp=[];// limpia el vector de letras rechazadas
 
   //dibuja la base
   dibujarLineas(0, 357, 294, 358);
@@ -64,9 +70,6 @@ for (let i=0; i<pruebaVector.length; i++){
 }
 }
 
-let visorLetras = document.querySelector("#letrasPresionadas");
-
-
 //evento que escucha el teclado
 document.addEventListener("keydown", (event) => {
     let nombre = event.key;
@@ -78,17 +81,24 @@ document.addEventListener("keydown", (event) => {
       let idx = array.indexOf(element);
 
       if (idx == -1) {
+        letrasRechazadasTemp.push(element);//carga el vector con las letras rechazadas para luego compararlas y que no ser repitan
+
+        
         let nuevaLetraInvalida = document.createElement("div");
         nuevaLetraInvalida.innerHTML = element;
         nuevaLetraInvalida.classList.add("letrasInvalidas");
         visorLetras.appendChild(nuevaLetraInvalida);
-
+        
+        console.log("vector rechazado: "+letrasRechazadasTemp);
         console.log("valor no encontrado");
         contadorErrores++;
         dibujadorDePartes();
       } else {
+        letrasAceptadasTemp.push(element);
+
         while (idx != -1) {
           indices.push(idx);
+                    console.log("vector aceptado: "+letrasAceptadasTemp);
           idx = array.indexOf(element, idx + 1);
         }
       }
@@ -99,5 +109,3 @@ document.addEventListener("keydown", (event) => {
   },
   false
 );
-
-//
