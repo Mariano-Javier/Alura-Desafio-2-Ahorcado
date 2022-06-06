@@ -193,9 +193,11 @@ let palabraAAgregar = document.querySelector("#palabraNueva").value;
 palabrasAhorcado.push(palabraAAgregar);
 palabraAAgregar = document.querySelector("#palabraNueva").value = "";
 });
+
 //funcion que sale al menu principal
 botonCancelarPalabra.addEventListener("click", function(event){
 event.preventDefault();
+palabraAAgregar = document.querySelector("#palabraNueva").value = "";
 document.querySelector("#agregarPalabra").classList.add("esconder");
 desistirJuego();
 });
@@ -203,6 +205,7 @@ desistirJuego();
 //accion del boton agregar palabra del menu principal que lleva al submenu agregar palabra
 botonAgregarPrincipal.addEventListener("click",agregarPrincipal)
 function agregarPrincipal(){
+  document.removeEventListener("keydown", escuchar);
   panelPrincipal.classList.add("esconder");
   document.querySelector(".bloqueJuego").classList.add("esconder");
   document.querySelector("#agregarPalabra").classList.remove("esconder");

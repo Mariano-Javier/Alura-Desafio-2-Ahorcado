@@ -46,10 +46,14 @@
 
       <div id="agregarPalabra" class="esconder">
         <form id="form-adicionar">
-          <input id="palabraNueva" name="palabra" type="text" placeholder="Ingrese una palabra" class="campo" />
+        <div class="contenedorTexto">
+          
+          <textarea name="palabra" rows="10" cols="50" id="palabraNueva" type="text" placeholder="Ingrese una palabra" class="campo" ></textarea>
+
+        </div>
           <div class="botonesBase">
-            <button id="adicionarPalabra" class="bto-principal"> Guardar</button>
-            <button id="cancelarPalabra" class="bto-principal">Volver</button>
+            <button id="adicionarPalabra" class="bto-guardar centro"> Guardar</button>
+            <button id="cancelarPalabra" class="bto-volver centro">Volver</button>
           </div>
         </form>
       </div>

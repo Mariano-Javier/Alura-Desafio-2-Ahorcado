@@ -160,3 +160,62 @@ header img {
   height: 70px;
   margin-bottom: 10px;
 }
+
+
+.bto-guardar{
+  width: 280px;
+  height: 67px;
+  color: white;
+  background-color: #0a3871;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: none;
+}
+.bto-guardar:hover {
+  background-color: #072549;
+}
+
+.bto-volver{
+  width: 280px;
+  height: 67px;
+  border-radius: 20px;
+  font-size: 1rem;
+  border: 1px solid #082c57;
+  color: #082c57;
+  background-color: #f3f5fc;
+}
+.bto-volver:hover {
+  background-color: #e0e4f1;
+}
+
+.botonesBase{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#palabraNueva{
+  margin-top: 30px;
+  width: 80vw;
+  height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+.contenedorTexto{
+  display: flex;
+
+}
+
+textarea{
+  font-family: "Inter", sans-serif;
+  color: #0a3871;
+  font-size: 30px;
+  border: none;
+  background-color: #f3f5fc;
+  border-radius: 10px;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #0a3871;
+}
