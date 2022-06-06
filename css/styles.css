@@ -214,8 +214,26 @@ textarea{
   border: none;
   background-color: #f3f5fc;
   border-radius: 10px;
+  resize: none;
 }
 
 textarea::-webkit-input-placeholder {
   color: #0a3871;
+}
+
+#exclamacion {
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+  margin-left: 10vw;
+  margin-top: 20px;
+}
+
+.errores{
+  height: 60px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

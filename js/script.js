@@ -106,10 +106,10 @@ function contadorLetras(array, valor) {
 
 //funcion que genera el motor del juego
 function escuchar(event){
-  let nombre = event.key;
+  let nombre = (event.key).toLowerCase();
 
   console.log("tecla presionada: " + nombre);
-  if (nombre.match(/^([a-z|ñ|]{1,})$/)) {
+  if (nombre.match(/^([a-z|ñ|]{1,})$/) && (event.key.length === 1)) {
     //[a-z] limite de valores, {1,} indica el largo de caracteres, en este caso solo buscamos 1, ya que hay teclas q comienzan con caracteres validos.
     let indices = []; //vector que va a devolver los valores de los indices que el usuario ingreso por teclado
     let array = palabraABuscar; //vector con la palabra dividida
@@ -186,17 +186,37 @@ function ganaste() {
   document.removeEventListener("keydown", escuchar);
 }
 
+let errores = document.querySelector(".errores");
+
 //boton y funcion para agregar una palabra al vector
 botonAgregarPalabra.addEventListener("click", function(event){
 event.preventDefault();
-let palabraAAgregar = document.querySelector("#palabraNueva").value;
-palabrasAhorcado.push(palabraAAgregar);
-palabraAAgregar = document.querySelector("#palabraNueva").value = "";
+
+errores.innerHTML="";
+
+let palabraAAgregar = document.querySelector("#palabraNueva").value.toLowerCase();
+
+if (palabraAAgregar.length>0 && palabraAAgregar.length<9 && palabraAAgregar.match(/^([a-z|ñ|]{1,})$/)){
+  let error = document.createElement("div");
+  error.innerHTML ="<p>¡Palabra agregada con éxito!</p>";
+  errores.appendChild(error);
+  palabrasAhorcado.push(palabraAAgregar);
+  palabraAAgregar = document.querySelector("#palabraNueva").value = "";
+
+}else{
+  
+  let error = document.createElement("div");
+  error.innerHTML ="<p>Palabra incompatible, vuelva a escribir una palabra válida</p>";
+  errores.appendChild(error);
+  palabraAAgregar = document.querySelector("#palabraNueva").value = "";
+}
+
 });
 
 //funcion que sale al menu principal
 botonCancelarPalabra.addEventListener("click", function(event){
 event.preventDefault();
+errores.innerHTML="";
 palabraAAgregar = document.querySelector("#palabraNueva").value = "";
 document.querySelector("#agregarPalabra").classList.add("esconder");
 desistirJuego();
