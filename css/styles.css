@@ -49,7 +49,6 @@ header img {
 
 .esconder{
   display: none;
- 
 }
 
 .invisible {
@@ -57,12 +56,9 @@ header img {
 }
 
 .tablero{
-  /* width: 1200px;
-  height: 700px; */
   padding: 0;
   margin: auto;
   display: block;
-  /* border:1px solid #d3d3d3; */
 }
 
 .nuevoJuego{
@@ -106,11 +102,10 @@ header img {
   margin-bottom: 40px;
 }
 
-#bloqueLetras{
+.letras {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .letrasIndividuales{
@@ -124,12 +119,11 @@ header img {
   margin-right: 6px
 }
 
-#bloqueRenglones{
+.renglones{
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 15px;
-  
 }
 
 .canvasSecundario{
@@ -140,7 +134,7 @@ header img {
   margin-right: 6px;
 }
 
-#letrasPresionadas{
+.presionadas{
   display: flex;
   align-items: center;
   justify-content: center;

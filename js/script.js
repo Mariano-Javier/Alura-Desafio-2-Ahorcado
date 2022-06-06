@@ -15,6 +15,19 @@ let letrasRechazadasTemp = [];
 botonIniciar.addEventListener("click", crearTablero);
 botonIniciar.addEventListener("click", generadorPalabrasRandom);
 
+//funcion y evento desistir
+let botonDesistir = document.querySelector(".desistir");
+botonDesistir.addEventListener("click",function(){
+  panelPrincipal.classList.remove("esconder");
+  tablero.classList.remove("tablero");
+  tablero.classList.add("esconder");
+  botonesInteractuar.classList.add("esconder");
+  botonesInteractuar.classList.remove("comandos");
+  document.querySelector(".bloqueJuego").classList.add("esconder");
+})
+
+
+
 //procede a salir del menu principal al juego
 function crearTablero() {
   panelPrincipal.classList.add("esconder");
@@ -22,6 +35,8 @@ function crearTablero() {
   tablero.classList.remove("esconder");
   botonesInteractuar.classList.remove("esconder");
   botonesInteractuar.classList.add("comandos");
+  document.querySelector(".bloqueJuego").classList.remove("esconder");
+
 }
 
 //Selector del boton para buscar una palabra nueva

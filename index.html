@@ -24,21 +24,20 @@
         <button class="principal bloque">Iniciar juego</button>
         <button class="secundario bloque">Agregar nueva palabra</button>
       </div>
-     
-        <canvas class="esconder canvasPrincipal" width="294px" height="360px"></canvas>
-        <div class="mensajeFinal"></div>
+
+      <canvas class="esconder canvasPrincipal" width="294px" height="360px"></canvas>
       
 
-      <div id="bloqueLetras"></div>
-      <div id="bloqueRenglones"></div>
-      <div id="letrasPresionadas"></div>
-
+      <div class="bloqueJuego">
+        <div class="mensajeFinal"></div>
+        <div id="bloqueLetras" class="letras"></div>
+        <div id="bloqueRenglones" class="renglones"></div>
+        <div id="letrasPresionadas" class="presionadas"></div>
+      </div>
       <div class="interaccion esconder">
         <button class="nuevoJuego centro">Nuevo juego</button>
         <button class="desistir centro">Desistir</button>
       </div>
-
-
     </main>
 
     <script src="js/script.js"></script>
