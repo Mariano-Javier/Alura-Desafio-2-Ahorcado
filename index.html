@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Juego del ahorcado - Alura Challenges Oracle ONE</title>
@@ -25,8 +26,11 @@
         <button class="secundario bloque">Agregar nueva palabra</button>
       </div>
 
-      <canvas class="esconder canvasPrincipal" width="294px" height="360px"></canvas>
-      
+      <canvas
+        class="esconder canvasPrincipal"
+        width="294px"
+        height="360px"
+      ></canvas>
 
       <div class="bloqueJuego">
         <div class="mensajeFinal"></div>
@@ -34,9 +38,20 @@
         <div id="bloqueRenglones" class="renglones"></div>
         <div id="letrasPresionadas" class="presionadas"></div>
       </div>
+
       <div class="interaccion esconder">
         <button class="nuevoJuego centro">Nuevo juego</button>
         <button class="desistir centro">Desistir</button>
+      </div>
+
+      <div id="agregarPalabra" class="esconder">
+        <form id="form-adicionar">
+          <input id="palabraNueva" name="palabra" type="text" placeholder="Ingrese una palabra" class="campo" />
+          <div class="botonesBase">
+            <button id="adicionarPalabra" class="bto-principal"> Guardar</button>
+            <button id="cancelarPalabra" class="bto-principal">Volver</button>
+          </div>
+        </form>
       </div>
     </main>
 

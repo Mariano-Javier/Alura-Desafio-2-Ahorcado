@@ -6,6 +6,11 @@ let botonesInteractuar = document.querySelector(".interaccion");
 
 let visorLetras = document.querySelector("#letrasPresionadas");
 
+
+let botonAgregarPalabra = document.querySelector("#adicionarPalabra");
+let botonCancelarPalabra = document.querySelector("#cancelarPalabra");
+let botonAgregarPrincipal = document.querySelector(".secundario");
+
 let contadorErrores;
 
 let letrasAceptadasTemp = [];
@@ -17,16 +22,17 @@ botonIniciar.addEventListener("click", generadorPalabrasRandom);
 
 //funcion y evento desistir
 let botonDesistir = document.querySelector(".desistir");
-botonDesistir.addEventListener("click",function(){
+
+botonDesistir.addEventListener("click", desistirJuego)
+
+function desistirJuego(){
   panelPrincipal.classList.remove("esconder");
   tablero.classList.remove("tablero");
   tablero.classList.add("esconder");
   botonesInteractuar.classList.add("esconder");
   botonesInteractuar.classList.remove("comandos");
   document.querySelector(".bloqueJuego").classList.add("esconder");
-})
-
-
+}
 
 //procede a salir del menu principal al juego
 function crearTablero() {
@@ -178,4 +184,26 @@ function ganaste() {
   nuevoMesaje.innerHTML = "<p>¡Ganaste!</p>";
   fin.appendChild(nuevoMesaje);
   document.removeEventListener("keydown", escuchar);
+}
+
+//boton y funcion para agregar una palabra al vector
+botonAgregarPalabra.addEventListener("click", function(event){
+event.preventDefault();
+let palabraAAgregar = document.querySelector("#palabraNueva").value;
+palabrasAhorcado.push(palabraAAgregar);
+palabraAAgregar = document.querySelector("#palabraNueva").value = "";
+});
+//funcion que sale al menu principal
+botonCancelarPalabra.addEventListener("click", function(event){
+event.preventDefault();
+document.querySelector("#agregarPalabra").classList.add("esconder");
+desistirJuego();
+});
+
+//accion del boton agregar palabra del menu principal que lleva al submenu agregar palabra
+botonAgregarPrincipal.addEventListener("click",agregarPrincipal)
+function agregarPrincipal(){
+  panelPrincipal.classList.add("esconder");
+  document.querySelector(".bloqueJuego").classList.add("esconder");
+  document.querySelector("#agregarPalabra").classList.remove("esconder");
 }

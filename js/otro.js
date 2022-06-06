@@ -9,3 +9,9 @@ tablero.addEventListener(
   false
 );
 
+
+
+
+
+
+
