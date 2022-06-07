@@ -1,29 +1,26 @@
 let panelPrincipal = document.querySelector(".inicio");
 let botonIniciar = document.querySelector(".principal");
-let tablero = document.querySelector(".canvasPrincipal");
-let pincel = tablero.getContext("2d");
 let botonesInteractuar = document.querySelector(".interaccion");
-
 let visorLetras = document.querySelector("#letrasPresionadas");
-
-
 let botonAgregarPalabra = document.querySelector("#adicionarPalabra");
 let botonCancelarPalabra = document.querySelector("#cancelarPalabra");
 let botonAgregarPrincipal = document.querySelector(".secundario");
+let botonDesistir = document.querySelector(".desistir");
+let nuevoJuego = document.querySelector(".nuevoJuego");
+let errores = document.querySelector(".errores");
 
+let palabrasAhorcado = [ "hola", "mañana", "tarde", "noche", "lunes", "martes", "miercoles", "jueves", "viernes",];//Vector con las palabras a adivinar.
+
+let palabraABuscar;
+let vectorComparador;
 let contadorErrores;
-
 let letrasAceptadasTemp = [];
 let letrasRechazadasTemp = [];
 
-//evento del boton iniciar juego
-botonIniciar.addEventListener("click", crearTablero);
-botonIniciar.addEventListener("click", generadorPalabrasRandom);
-
-//funcion y evento desistir
-let botonDesistir = document.querySelector(".desistir");
-
-botonDesistir.addEventListener("click", desistirJuego)
+botonIniciar.addEventListener("click", crearTablero);//Evento - iniciar juego, procede a salir del menu principal.
+botonIniciar.addEventListener("click", generadorPalabrasRandom); //Evento - crear palabra random.
+botonDesistir.addEventListener("click", desistirJuego)//Evento - desistir del juego y retorna al menu principal.
+nuevoJuego.addEventListener("click", generadorPalabrasRandom);//Evento - buscar una palabra nueva.
 
 function desistirJuego(){
   panelPrincipal.classList.remove("esconder");
@@ -34,7 +31,6 @@ function desistirJuego(){
   document.querySelector(".bloqueJuego").classList.add("esconder");
 }
 
-//procede a salir del menu principal al juego
 function crearTablero() {
   panelPrincipal.classList.add("esconder");
   tablero.classList.add("tablero");
@@ -42,20 +38,8 @@ function crearTablero() {
   botonesInteractuar.classList.remove("esconder");
   botonesInteractuar.classList.add("comandos");
   document.querySelector(".bloqueJuego").classList.remove("esconder");
-
 }
 
-//Selector del boton para buscar una palabra nueva
-let nuevoJuego = document.querySelector(".nuevoJuego");
-nuevoJuego.addEventListener("click", generadorPalabrasRandom);
-
-//Vector con las palabras a adivinar
-let palabrasAhorcado = [ "hola", "mañana", "tarde", "noche", "lunes", "martes", "miercoles", "jueves", "viernes",];
-
-let palabraABuscar;
-let vectorComparador;
-
-//Funcion que busca una nueva palabra
 function generadorPalabrasRandom() {
   pincel.clearRect(0, 0, tablero.width, tablero.height); //limpia el canvas
   document.getElementById("bloqueLetras").innerHTML = ""; //limpia las letas del juego anterior
@@ -65,7 +49,7 @@ function generadorPalabrasRandom() {
   letrasAceptadasTemp = []; // limpia el vector de letras rechazadas
   resetMsg(); //limpia el mensaje final
 
-  //evento que escucha el teclado
+  ///Evento - escucha el teclado
   document.addEventListener("keydown", escuchar);
 
   //dibuja la base
@@ -76,11 +60,11 @@ function generadorPalabrasRandom() {
   let palabraDividida = palabraRandom.split("");
   palabraABuscar = palabraDividida;
   vectorComparador  = palabraABuscar.slice();
-  console.log(palabraDividida); //borrar
 
   //bloque que crea las letras a buscar en pantalla
   let bloqueLetras = document.querySelector("#bloqueLetras");
   let pruebaVector = palabraDividida;
+
   for (i = 0; i < pruebaVector.length; i++) {
     let nuevoDivL = document.createElement("span");
     nuevoDivL.classList.add("letrasIndividuales", "invisible");
@@ -97,44 +81,40 @@ function generadorPalabrasRandom() {
   }
 }
 
-//funcion contador de letras
+//función contador de letras
 function contadorLetras(array, valor) {
   var contador = 0;
   array.forEach((v) => v === valor && contador++);
   return contador;
 }
 
-//funcion que genera el motor del juego
+//función que genera el motor del juego
 function escuchar(event){
   let nombre = (event.key).toLowerCase();
 
-  console.log("tecla presionada: " + nombre);
-  if (nombre.match(/^([a-z|ñ|]{1,})$/) && (event.key.length === 1)) {
-    //[a-z] limite de valores, {1,} indica el largo de caracteres, en este caso solo buscamos 1, ya que hay teclas q comienzan con caracteres validos.
-    let indices = []; //vector que va a devolver los valores de los indices que el usuario ingreso por teclado
-    let array = palabraABuscar; //vector con la palabra dividida
-    let element = nombre; //caracter que ingresa el usuario por teclado
+  if (nombre.match(/^([a-z|ñ|]{1,})$/) && (event.key.length === 1)) { //a-z|ñ| valores permitidos. 
+    let indices = []; //vector que devuelve los valores de los indices que el usuario ingreso por teclado.
+    let array = palabraABuscar; //vector con la palabra dividida.
+    let element = nombre; //caracter que ingresa el usuario por teclado.
     let idx = array.indexOf(element);
 
     if (idx == -1) {
-      letrasRechazadasTemp.push(element); //carga el vector con las letras rechazadas para luego compararlas y que no ser repitan
+      letrasRechazadasTemp.push(element); //carga el vector con las letras rechazadas para luego compararlas y que no se repitan.
 
       if (letrasRechazadasTemp.includes(element) && contadorLetras(letrasRechazadasTemp, element) == 1 ) {
-        //verifica que no se escriban letras repetidas en pantalla
+
+        //verifica que no se escriban letras repetidas en pantalla.
         let nuevaLetraInvalida = document.createElement("div");
         nuevaLetraInvalida.innerHTML = element;
         nuevaLetraInvalida.classList.add("letrasInvalidas");
         visorLetras.appendChild(nuevaLetraInvalida);
-
-        console.log("vector rechazado: " + letrasRechazadasTemp);
-        console.log("valor no encontrado");
         contadorErrores++;
         dibujadorDePartes();
       }
     } else {
       letrasAceptadasTemp.push(element);
 
-       //uso del vector comparador que copia el vector con la palabar y va removiendo los valores que si cumplen para que luego de que el array llegue a 0 el jugador gane
+       //el vector comparador posee una copia de la palabra original y se van removiendo las letras que cumplen, al llegar el length a "0" se encontraron todas las letras y el usuario gana.
        vectorComparador = vectorComparador.filter(function(value, index, arr){ 
           return value != element;
       });
@@ -143,28 +123,21 @@ function escuchar(event){
         ganaste();
       }
 
-      console.log("vector aceptado: " + letrasAceptadasTemp);
-
       while (idx != -1) {
         indices.push(idx);
         idx = array.indexOf(element, idx + 1);
       }      
     }
 
-    console.log("indices: "+indices);
-
     let revelarAceptado = document.querySelectorAll(".letrasIndividuales");
 
     for (let i = 0; i < indices.length; i++) {
       revelarAceptado[indices[i]].classList.remove("invisible");
     }
-
-  } else {
-    console.log("no es letra");
-  }
+  } 
 }
 
-//funcion que escribe el mensaje final "perdiste"
+//función que escribe el mensaje final "perdiste".
 function perdiste() {
   let fin = document.querySelector(".mensajeFinal");
   let nuevoMesaje = document.createElement("div");
@@ -173,11 +146,12 @@ function perdiste() {
   document.removeEventListener("keydown", escuchar);
 }
 
-//funcion que resetea el mensaje cuando ganas o perdes
+//función que resetea el mensaje cuando ganas o perdes.
 function resetMsg() {
   document.querySelector(".mensajeFinal").innerHTML = "";
 }
-//funcion que escribe el mensaje final "ganaste"
+
+//función que escribe el mensaje final "ganaste"
 function ganaste() {
   let fin = document.querySelector(".mensajeFinal");
   let nuevoMesaje = document.createElement("div");
@@ -187,9 +161,7 @@ function ganaste() {
   document.removeEventListener("keydown", escuchar);
 }
 
-let errores = document.querySelector(".errores");
-
-//boton y funcion para agregar una palabra al vector
+//evento y funcion para agregar una palabra al vector
 botonAgregarPalabra.addEventListener("click", function(event){
 event.preventDefault();
 
@@ -205,16 +177,14 @@ if (palabraAAgregar.length>0 && palabraAAgregar.length<9 && palabraAAgregar.matc
   palabraAAgregar = document.querySelector("#palabraNueva").value = "";
 
 }else{
-  
   let error = document.createElement("div");
   error.innerHTML ="<p>Palabra incompatible, vuelva a escribir una palabra válida</p>";
   errores.appendChild(error);
   palabraAAgregar = document.querySelector("#palabraNueva").value = "";
 }
-
 });
 
-//funcion que sale al menu principal
+//función y evento que sale al menú principal
 botonCancelarPalabra.addEventListener("click", function(event){
 event.preventDefault();
 errores.innerHTML="";
@@ -223,7 +193,7 @@ document.querySelector("#agregarPalabra").classList.add("esconder");
 desistirJuego();
 });
 
-//accion del boton agregar palabra del menu principal que lleva al submenu agregar palabra
+//acción del boton "agregar palabra" del menu principal que lleva al submenu agregar palabra.
 botonAgregarPrincipal.addEventListener("click",agregarPrincipal)
 function agregarPrincipal(){
   document.removeEventListener("keydown", escuchar);

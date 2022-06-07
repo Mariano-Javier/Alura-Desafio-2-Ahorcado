@@ -1,3 +1,6 @@
+let tablero = document.querySelector(".canvasPrincipal");
+let pincel = tablero.getContext("2d");
+
 pincel.strokeStyle = "#0a3871";
 pincel.lineWidth = 5;
 
