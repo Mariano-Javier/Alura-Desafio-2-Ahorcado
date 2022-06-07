@@ -181,6 +181,7 @@ function resetMsg() {
 function ganaste() {
   let fin = document.querySelector(".mensajeFinal");
   let nuevoMesaje = document.createElement("div");
+  nuevoMesaje.classList.add("verde");
   nuevoMesaje.innerHTML = "<p>¡Ganaste!</p>";
   fin.appendChild(nuevoMesaje);
   document.removeEventListener("keydown", escuchar);

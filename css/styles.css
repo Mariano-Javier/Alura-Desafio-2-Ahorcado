@@ -161,6 +161,10 @@ header img {
   margin-bottom: 10px;
 }
 
+.verde{
+  color: #008839;
+}
+
 
 .bto-guardar{
   width: 280px;
@@ -236,4 +240,25 @@ textarea::-webkit-input-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+
+@media (max-width: 450px) {
+  .comandos {
+    text-align: center;
+    display: block;
+  }
+
+  header img{
+ 
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-bottom: 15px;
+  }
+
+  .botonesBase{
+    display: block;
+    text-align: center;
+  }
 }
