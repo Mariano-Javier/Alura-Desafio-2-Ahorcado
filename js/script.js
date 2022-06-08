@@ -161,6 +161,11 @@ function ganaste() {
   document.removeEventListener("keydown", escuchar);
 }
 
+//busca si el valor existe en el vector de palabras
+function verificarRepetido(valorNuevo){
+  return palabrasAhorcado.includes(valorNuevo);
+ }
+
 //evento y funcion para agregar una palabra al vector
 botonAgregarPalabra.addEventListener("click", function(event){
 event.preventDefault();
@@ -169,7 +174,15 @@ errores.innerHTML="";
 
 let palabraAAgregar = document.querySelector("#palabraNueva").value.toLowerCase();
 
-if (palabraAAgregar.length>0 && palabraAAgregar.length<9 && palabraAAgregar.match(/^([a-z|ñ|]{1,})$/)){
+
+if(verificarRepetido(palabraAAgregar)){
+  let error = document.createElement("div");
+  error.innerHTML ="<p>La palabra ya existe en la base de datos, ingrese otra palabra</p>";
+  errores.appendChild(error);
+  palabraAAgregar = document.querySelector("#palabraNueva").value = "";
+}
+
+else if (palabraAAgregar.length>0 && palabraAAgregar.length<9 && palabraAAgregar.match(/^([a-z|ñ|]{1,})$/)){
   let error = document.createElement("div");
   error.innerHTML ="<p>¡Palabra agregada con éxito!</p>";
   errores.appendChild(error);
@@ -201,3 +214,4 @@ function agregarPrincipal(){
   document.querySelector(".bloqueJuego").classList.add("esconder");
   document.querySelector("#agregarPalabra").classList.remove("esconder");
 }
+
