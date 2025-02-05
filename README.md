@@ -3,6 +3,7 @@
 Este proyecto es un juego del **Ahorcado** desarrollado como parte del desafío **Alura Challenges Oracle ONE**. Permite a los jugadores adivinar una palabra oculta mientras ponen en práctica sus habilidades de programación.  
 
 ![alt text][logo]
+
 [logo]:https://github.com/Mariano-Javier/Draw.io/blob/master/Alura%20Challenges%20Oracle%20ONE.png "alura"
 ## 🚀 Funcionamiento  
 
