@@ -1,17 +1,31 @@
-# Alura Challenges Oracle ONE - Juego del ahorcado
-En este primer mes vamos a trabajar en un proyecto de **juego del ahorcado** para que pongas en práctica lo que aprendiste a lo largo de esta formación **Principiante en Programación**.
+# 🎯 Juego del Ahorcado - Alura Challenges Oracle ONE  
 
-**Requisitos:**
-- Debe funcionar solo con letras mayúsculas;
-- No deben ser utilizadas letras con acentos ni caracteres especiales;
-- Al completar o dibujo de la horca, debe ser mostrado un mensaje "Fin del juego" en la pantalla;
-- Si se completa la palabra correcta antes de que se acaben los intentos, debe ser mostrado un mensaje de "Ganaste, Felicidades!" en la pantalla.
-- La página debe tener los guiones indicando cada letra da palabra, separados por un espacio;
-- Para comenzar el juego la página debe tener un botón de "Iniciar Juego";
-- No debe ser posible escribir números dentro del juego.
-- Las letras equivocadas deben aparecer en la pantalla, pero no pueden aparecer de forma repetida;
-- Las letras correctas deben aparecer en la pantalla encima de los guiones, en la posición correcta em relación a la palabra.
+Este proyecto es un juego del **Ahorcado** desarrollado como parte del desafío **Alura Challenges Oracle ONE**. Permite a los jugadores adivinar una palabra oculta mientras ponen en práctica sus habilidades de programación.  
+![alt text][logo]
 
-**Extras:**
-- La página debe tener un campo para inserción de texto con la finalidad de adicionar nuevas palabras al juego, e un botón "Agregar palabra". 
+[logo]:https://github.com/Mariano-Javier/Draw.io/blob/master/Alura%20Challenges%20Oracle%20ONE.png "alura"
+## 🚀 Funcionamiento  
 
+1. El usuario presiona el botón **"Iniciar Juego"** para comenzar.  
+2. Se muestra una palabra oculta representada por **guiones**.  
+3. El jugador ingresa letras (solo mayúsculas) para intentar adivinar la palabra.  
+4. Las letras correctas aparecen en su **posición correspondiente**.  
+5. Las letras incorrectas se muestran en pantalla, pero **sin repetirse**.  
+6. Si el jugador completa el dibujo de la horca, se muestra **"Fin del juego"**.  
+7. Si adivina la palabra antes de agotar los intentos, se muestra **"¡Ganaste, Felicidades!"**.  
+
+## 🛠️ Tecnologías utilizadas  
+
+- HTML  
+- CSS  
+- JavaScript  
+
+## 📌 Uso  
+
+1. Haz clic en **"Iniciar Juego"**.  
+2. Escribe letras para intentar adivinar la palabra.  
+3. Usa el botón **"Agregar palabra"** para añadir nuevas palabras al juego.  
+
+---
+
+🚀 Desarrollado para el **Alura Challenges Oracle ONE**.  
